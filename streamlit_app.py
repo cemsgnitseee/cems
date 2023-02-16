@@ -8,7 +8,7 @@ scope = ['https://www.googleapis.com/auth/spreadsheets']
 creds = Credentials.from_service_account_file("keys.json", scopes=scope)
 client = gspread.authorize(creds)
 today = date.today()
-default_date_yesterday = (today - timedelta(days=1))
+default_date_yesterday = (today - timedelta(days=0))
 selected_date = st.date_input("Date", default_date_yesterday)
 selected_date=str(selected_date)
 year=selected_date[:4]
