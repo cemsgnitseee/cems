@@ -1,5 +1,5 @@
-pip== 22.3.1
-streamlit==1.16.0
+pip
+streamlit
 gspread
 google-api-python-client
 google-auth-httplib2
