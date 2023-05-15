@@ -29,18 +29,21 @@ daybefore=month+"/"+str(int(day)-1).zfill(2)+"/"+year[2:]
 if st.button("energy consumed"):
     meters=['Admin_1_250','Admin_2_250','IT_250','EEE_ECE_CSE_HOSTEL_800','GEN_BYPASS_600','IT_400','Auditorium_E-Block_250','Canteen_Motors_125','Capacitors_800','Main_Incoming_1250']
     for i in meters:
-        h=str(sheetname+i)
-        sheet1=spreadsheet1.worksheet(h)
-        df = pd.DataFrame(data=sheet1.get_all_records())
-        grouped_df = df.groupby("date").agg(list)
-        grouped_lists = grouped_df.reset_index()
-        present=(grouped_lists.loc[grouped_lists["date"]==exactdate])
-        present = present.reset_index()
-        past=(grouped_lists.loc[grouped_lists["date"]==daybefore])
-        past = past.reset_index()
-        present=int(present["Energy"][len(present)-1][-1])
-        past=int(past["Energy"][len(past)-1][-1])
-        st.write("energy consumed by "+i+" "+str(present-past))
+        try:
+            h=str(sheetname+i)
+            sheet1=spreadsheet1.worksheet(h)
+            df = pd.DataFrame(data=sheet1.get_all_records())
+            grouped_df = df.groupby("date").agg(list)
+            grouped_lists = grouped_df.reset_index()
+            present=(grouped_lists.loc[grouped_lists["date"]==exactdate])
+            present = present.reset_index()
+            past=(grouped_lists.loc[grouped_lists["date"]==daybefore])
+            past = past.reset_index()
+            present=int(present["Energy"][len(present)-1][-1])
+            past=int(past["Energy"][len(past)-1][-1])
+            st.write("energy consumed by "+i+" "+str(present-past))
+        except:
+            pass
 
 metername= st.multiselect(
     'select meters',['GPR_Memorial_250','Admin_1_250','Admin_2_250','IT_250','EEE_ECE_CSE_HOSTEL_800','GEN_BYPASS_600','IT_400','Auditorium_E-Block_250','Canteen_Motors_125','Capacitors_800','Main_Incoming_1250'])
