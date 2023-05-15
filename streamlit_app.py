@@ -42,7 +42,7 @@ if st.button("energy consumed"):
             present=int(present["Energy"][len(present)-1][-1])
             past=int(past["Energy"][len(past)-1][-1])
             st.write("energy consumed by "+i+" "+str(present-past))
-        except:
+        except Exception as er:
             pass
 
 metername= st.multiselect(
